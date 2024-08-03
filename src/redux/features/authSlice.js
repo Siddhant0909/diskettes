@@ -6,7 +6,7 @@ export const signup = createAsyncThunk(
   async ({ email, password, name }) => {
     await account.create("unique()", email, password, name);
     await account.createEmailPasswordSession(email, password);
-    return await account.getSession("current");
+    return await account.get();
   }
 );
 
@@ -14,14 +14,14 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ email, password }) => {
     await account.createEmailPasswordSession(email, password);
-    return await account.getSession("current");
+    return await account.get();
   }
 );
 
 export const getCurrentUser = createAsyncThunk(
   "auth/getCurrentUser",
   async () => {
-    return await account.getSession("current");
+    return await account.get();
   }
 );
 
