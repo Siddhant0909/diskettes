@@ -14,6 +14,7 @@ import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import PrivateRoutes from "./utils/PrivateRoutes.jsx";
 import { store } from "./redux/store.js";
+import EditorWindow from "./pages/EditorWindow.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/editor" element={<EditorWindow />} />
     </Route>
   )
 );

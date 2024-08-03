@@ -1,16 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { logout } from "../redux/features/authSlice";
+import BottomNav from "../components/BottomNav";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(logout());
-  };
   return (
     <div>
-      Home
-      <button onClick={handleLogout}>logout</button>
+      <BottomNav />
     </div>
   );
 };
