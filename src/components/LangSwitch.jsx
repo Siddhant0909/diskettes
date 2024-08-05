@@ -8,7 +8,7 @@ const LangSwitch = ({ setActive, active }) => {
   return (
     <div className="flex">
       {LANGUAGES.map((lang) =>
-        active == lang ? (
+        active === lang ? (
           <button
             key={lang}
             onClick={() => handleClick(lang)}
