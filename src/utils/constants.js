@@ -1,3 +1,12 @@
+export const COLORS = {
+  red: "#ef4444",
+  organge: "#f97316",
+  green: "#10b981",
+  indigo: "#4f46e5",
+  voilet: "#8b5cf6",
+  pink: "#f472b6",
+};
+
 export const SAMPLE_CODE = {
   html: `
   <div class="container">

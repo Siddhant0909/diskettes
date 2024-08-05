@@ -4,20 +4,23 @@ import { config } from "../../../config";
 import { Query } from "appwrite";
 
 export const fetchAllDisk = createAsyncThunk("disk/fetchAllDisk", async () => {
-  return await databases.listDocuments(
+  const response = await databases.listDocuments(
     config.appwriteDatabaseId,
-    config.appwriteCollectionId
+    config.appwriteCollectionId,
+    [Query.orderDesc("$createdAt")]
   );
+  return response.documents;
 });
 
 export const fetchUserDisk = createAsyncThunk(
   "disk/fetchUserDisk",
   async (userId) => {
-    return await databases.listDocuments(
+    const response = await databases.listDocuments(
       config.appwriteDatabaseId,
       config.appwriteCollectionId,
-      [Query.equal("userId", userId)]
+      [Query.equal("userId", userId), Query.orderDesc("$createdAt")]
     );
+    return response.documents;
   }
 );
 
@@ -43,7 +46,7 @@ export const getDisk = createAsyncThunk("disk/getDisk", async (documentId) => {
 
 export const updateDisk = createAsyncThunk(
   "disk/updateDisk",
-  async (documentId, data) => {
+  async ({ documentId, data }) => {
     return await databases.updateDocument(
       config.appwriteDatabaseId,
       config.appwriteCollectionId,
@@ -55,11 +58,11 @@ export const updateDisk = createAsyncThunk(
 
 export const deleteDisk = createAsyncThunk(
   "disk/deleteDisk",
-  async (databaseId) => {
+  async (documentId) => {
     return await databases.deleteDocument(
       config.appwriteDatabaseId,
       config.appwriteCollectionId,
-      databaseId
+      documentId
     );
   }
 );
@@ -99,6 +102,7 @@ const diskSlice = createSlice({
       .addCase(fetchUserDisk.rejected, rejectedCB)
       .addCase(createNewDisk.pending, pendingCB)
       .addCase(createNewDisk.fulfilled, (state, action) => {
+        state.loading = false;
         state.disks.push(action.payload);
       })
       .addCase(createNewDisk.rejected, rejectedCB)
@@ -107,11 +111,14 @@ const diskSlice = createSlice({
         state.loading = false;
       })
       .addCase(getDisk.rejected, rejectedCB)
-      .addCase(updateDisk.pending, pendingCB)
       .addCase(updateDisk.fulfilled, (state, action) => {
-        state.loading = false;
+        state.disks = state.disks.map((disk) =>
+          disk.$id === action.payload.$id ? action.payload : disk
+        );
       })
-      .addCase(updateDisk.rejected, rejectedCB)
+      .addCase(updateDisk.rejected, (state, action) => {
+        state.error = action.error.message;
+      })
       .addCase(deleteDisk.pending, pendingCB)
       .addCase(deleteDisk.fulfilled, (state) => {
         state.loading = false;

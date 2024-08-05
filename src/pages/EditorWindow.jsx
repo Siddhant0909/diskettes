@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import CodeEditor from "../components/CodeEditor";
 import { SAMPLE_CODE } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Preview from "../components/Preview";
 import LangSwitch from "../components/LangSwitch";
 import PreviewSwitch from "../components/PreviewSwitch";
+import Loader from "../components/Loader";
+import { getDisk, updateDisk } from "../redux/features/diskSlice";
 
 const EditorWindow = () => {
-  const [html, setHtml] = useState(SAMPLE_CODE.html);
-  const [css, setCss] = useState(SAMPLE_CODE.css);
-  const [javascript, setJavascript] = useState(SAMPLE_CODE.javascript);
+  const userId = JSON.parse(localStorage.getItem("user")).$id;
+  const [html, setHtml] = useState("");
+  const [css, setCss] = useState("");
+  const [javascript, setJavascript] = useState("");
 
   const [active, setActive] = useState("html");
   const [preview, setPreview] = useState(false);
+
+  const [isReadOnly, setIsReadOnly] = useState(null);
 
   const [code, setCode] = useState(`
       <html>
@@ -46,29 +53,68 @@ const EditorWindow = () => {
     return () => clearTimeout(timer);
   }, [html, css, javascript]);
 
-  return (
+  const dispatch = useDispatch();
+  const { documentId } = useParams();
+  const { loading } = useSelector((state) => state.disk);
+
+  useEffect(() => {
+    dispatch(getDisk(documentId)).then((res) => {
+      setHtml(res.payload.html);
+      setCss(res.payload.css);
+      setJavascript(res.payload.javascript);
+      setIsReadOnly(Boolean(userId === res.payload.userId));
+    });
+  }, []);
+
+  const data = {
+    html,
+    css,
+    javascript,
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(updateDisk({ documentId, data }));
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [html, css, javascript]);
+
+  return loading ? (
+    <Loader />
+  ) : (
     <div>
-      <div className="hidden w-full lg:grid-cols-2 lg:grid">
+      <div className="hidden w-full lg:grid-cols-2 lg:grid shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]">
         <div className="flex flex-col">
-          <div className="w-full bg-gradient-to-r from-slate-900 to-slate-700">
+          <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
             <LangSwitch setActive={setActive} active={active} />
           </div>
           {(active == "html" && (
-            <CodeEditor language="html" value={html} setVal={setHtml} />
+            <CodeEditor
+              isReadOnly={isReadOnly}
+              language="html"
+              value={html}
+              setVal={setHtml}
+            />
           )) ||
             (active == "css" && (
-              <CodeEditor language="css" value={css} setVal={setCss} />
+              <CodeEditor
+                isReadOnly={isReadOnly}
+                language="css"
+                value={css}
+                setVal={setCss}
+              />
             )) ||
             (active == "javascript" && (
               <CodeEditor
                 language="javascript"
                 value={javascript}
                 setVal={setJavascript}
+                isReadOnly={isReadOnly}
               />
             ))}
         </div>
         <div className="flex flex-col overflow-hidden">
-          <div className="w-full bg-gradient-to-r from-slate-900 to-slate-700">
+          <div className="w-full bg-gradient-to-r from-slate-800 to-slate-700">
             <h3 className="p-1 w-fit text-sm bg-[#011627] hover:bg-slate-600 ">
               Preview
             </h3>
@@ -79,27 +125,38 @@ const EditorWindow = () => {
       {!preview ? (
         <div className="grid w-full grid-cols-1 lg:hidden">
           <div className="flex flex-col">
-            <div className="w-full bg-gradient-to-r from-slate-900 to-slate-700">
+            <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
               <LangSwitch setActive={setActive} active={active} />
             </div>
             {(active == "html" && (
-              <CodeEditor language="html" value={html} setVal={setHtml} />
+              <CodeEditor
+                isReadOnly={isReadOnly}
+                language="html"
+                value={html}
+                setVal={setHtml}
+              />
             )) ||
               (active == "css" && (
-                <CodeEditor language="css" value={css} setVal={setCss} />
+                <CodeEditor
+                  isReadOnly={isReadOnly}
+                  language="css"
+                  value={css}
+                  setVal={setCss}
+                />
               )) ||
               (active == "javascript" && (
                 <CodeEditor
                   language="javascript"
                   value={javascript}
                   setVal={setJavascript}
+                  isReadOnly={isReadOnly}
                 />
               ))}
           </div>
         </div>
       ) : (
         <div className="flex flex-col h-screen overflow-hidden lg:hidden">
-          <div className="w-full bg-gradient-to-r from-slate-900 to-slate-700">
+          <div className="w-full bg-gradient-to-r from-slate-800 to-slate-700">
             <h3 className="p-1 w-fit text-sm bg-[#011627] hover:bg-slate-600 ">
               Preview
             </h3>

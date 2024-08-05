@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import { Editor, useMonaco } from "@monaco-editor/react";
 import "monaco-themes/themes/Night Owl.json";
-import { data } from "autoprefixer";
 
-const CodeEditor = ({ language, value, setVal }) => {
+const CodeEditor = ({ language, value, setVal, isReadOnly }) => {
   const monaco = useMonaco();
 
   const handleValueChange = (newVal) => {
     setVal(newVal);
   };
+
   const editorRef = useRef();
 
   const handleMount = (editor) => {
@@ -35,6 +35,7 @@ const CodeEditor = ({ language, value, setVal }) => {
       options={{
         minimap: { enabled: false },
         wordWrap: "on",
+        readOnly: !isReadOnly,
       }}
     />
   );

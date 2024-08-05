@@ -15,16 +15,24 @@ import Signup from "./pages/Signup.jsx";
 import PrivateRoutes from "./utils/PrivateRoutes.jsx";
 import { store } from "./redux/store.js";
 import EditorWindow from "./pages/EditorWindow.jsx";
+import Create from "./pages/Create.jsx";
+import MyDisk from "./pages/MyDisk.jsx";
+import Saved from "./pages/Saved.jsx";
+import Search from "./pages/Search.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route element={<PrivateRoutes />}>
         <Route path="" element={<Home />} />
+        <Route path="/create" element={<Create />} />
+        <Route path="/disks" element={<MyDisk />} />
+        <Route path="/saved" element={<Saved />} />
+        <Route path="/disk/:documentId" element={<EditorWindow />} />
+        <Route path="/search/:diskTitleSlug" element={<Search />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/editor" element={<EditorWindow />} />
     </Route>
   )
 );

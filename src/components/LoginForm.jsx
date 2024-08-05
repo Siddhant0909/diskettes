@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../redux/features/authSlice";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const handleUserLogin = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    dispatch(login({ email, password })).then(() => navigate("/"));
   };
 
   return (
-    <div className="flex items-center justify-center w-full h-screen">
+    <div className="flex items-center justify-center mt-[-56px] w-full h-screen">
       <div className=" w-[350px] bg-slate-900 shadow-sm mt-7 rounded-xl  border-2 border-solid border-slate-900">
         <div className="p-4 sm:p-7">
           <div className="text-center">

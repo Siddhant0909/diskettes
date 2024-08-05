@@ -1,30 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import BottomNav from "../components/BottomNav";
 import Disk from "../components/Disk";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Loader from "../components/Loader";
 import { fetchAllDisk } from "../redux/features/diskSlice";
-import { fetchSavedDisk } from "../redux/features/saveSlice";
 
-const Home = () => {
+const Search = () => {
   const dispatch = useDispatch();
-  const { loading, disks } = useSelector((state) => state.disk);
+
   const [isVisble, setIsVisible] = useState(false);
-  const userId = JSON.parse(localStorage.getItem("user")).$id;
+
+  const userId = JSON.parse(localStorage.getItem("user"))?.$id;
+  const { disks, loading } = useSelector((state) => state.disk);
+  const [searchDisks, setSearchDisks] = useState([]);
+  const { diskTitleSlug } = useParams();
+
   useEffect(() => {
     dispatch(fetchAllDisk());
   }, []);
+
   useEffect(() => {
-    if (userId) {
-      dispatch(fetchSavedDisk(userId));
+    if (disks) {
+      setIsVisible(false);
+      setSearchDisks(
+        disks.filter((disk) =>
+          disk.title.toLowerCase().includes(diskTitleSlug.toLowerCase())
+        )
+      );
     }
-  }, [userId]);
+  }, [disks, diskTitleSlug]);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setIsVisible(true);
-    }, 500);
+    }, 1000);
     () => clearInterval(timer);
   }, []);
+
   return loading ? (
     <Loader />
   ) : !isVisble ? (
@@ -32,15 +44,14 @@ const Home = () => {
   ) : (
     <>
       <div className="flex flex-wrap justify-center w-full h-full gap-4 p-3 pt-4 pb-[66px] sm:justify-start">
-        {disks?.map((disk) => (
+        {searchDisks?.map((disk) => (
           <div key={disk.$id}>
             <Disk disk={disk} userId={userId} />
           </div>
         ))}
       </div>
-      <BottomNav />
     </>
   );
 };
 
-export default Home;
+export default Search;
