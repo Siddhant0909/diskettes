@@ -67,9 +67,9 @@ const EditorWindow = () => {
   }, []);
 
   const data = {
-    html,
-    css,
-    javascript,
+    html: html,
+    css: css,
+    javascript: javascript,
   };
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const EditorWindow = () => {
           <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
             <LangSwitch setActive={setActive} active={active} />
           </div>
-          {(active == "html" && (
+          {(active === "html" && (
             <CodeEditor
               isReadOnly={isReadOnly}
               language="html"
@@ -96,7 +96,7 @@ const EditorWindow = () => {
               setVal={setHtml}
             />
           )) ||
-            (active == "css" && (
+            (active === "css" && (
               <CodeEditor
                 isReadOnly={isReadOnly}
                 language="css"
@@ -104,7 +104,7 @@ const EditorWindow = () => {
                 setVal={setCss}
               />
             )) ||
-            (active == "javascript" && (
+            (active === "javascript" && (
               <CodeEditor
                 language="javascript"
                 value={javascript}
@@ -128,7 +128,7 @@ const EditorWindow = () => {
             <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
               <LangSwitch setActive={setActive} active={active} />
             </div>
-            {(active == "html" && (
+            {(active === "html" && (
               <CodeEditor
                 isReadOnly={isReadOnly}
                 language="html"
@@ -136,7 +136,7 @@ const EditorWindow = () => {
                 setVal={setHtml}
               />
             )) ||
-              (active == "css" && (
+              (active === "css" && (
                 <CodeEditor
                   isReadOnly={isReadOnly}
                   language="css"
@@ -144,7 +144,7 @@ const EditorWindow = () => {
                   setVal={setCss}
                 />
               )) ||
-              (active == "javascript" && (
+              (active === "javascript" && (
                 <CodeEditor
                   language="javascript"
                   value={javascript}
