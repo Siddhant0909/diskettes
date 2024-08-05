@@ -19,7 +19,7 @@ const EditorWindow = () => {
   const [preview, setPreview] = useState(false);
 
   const [isReadOnly, setIsReadOnly] = useState(true);
-  console.log(isReadOnly);
+  console.log(active);
 
   const [code, setCode] = useState(`
       <html>
@@ -60,8 +60,6 @@ const EditorWindow = () => {
 
   useEffect(() => {
     dispatch(getDisk(documentId)).then((res) => {
-      console.log(res);
-
       setHtml(res.payload.html);
       setCss(res.payload.css);
       setJavascript(res.payload.javascript);
