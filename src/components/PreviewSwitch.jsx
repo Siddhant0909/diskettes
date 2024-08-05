@@ -7,14 +7,14 @@ const PreviewSwitch = ({ preview, setPreview }) => {
       {preview ? (
         <div
           onClick={() => setPreview(false)}
-          className="text-[25px] p-2 rounded-full cursor-pointer"
+          className="text-[32px] p-2 rounded-full cursor-pointer"
         >
           <FaCode />
         </div>
       ) : (
         <div
           onClick={() => setPreview(true)}
-          className="text-[25px] p-2 rounded-full cursor-pointer"
+          className="text-[32px] p-2 rounded-full cursor-pointer"
         >
           <FaEye />
         </div>
