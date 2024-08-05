@@ -17,13 +17,9 @@ const EditorWindow = () => {
 
   const [active, setActive] = useState("html");
   const [preview, setPreview] = useState(false);
+  console.log(active);
 
   const [isReadOnly, setIsReadOnly] = useState(true);
-  console.log({
-    html,
-    css,
-    javascript,
-  });
 
   const [code, setCode] = useState(`
       <html>
