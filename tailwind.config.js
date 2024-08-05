@@ -7,7 +7,7 @@ export default {
         kalam: ["Kalam", "cursive"],
         ibmsans: ["IBM Plex Sans", "sans-serif"],
         ibmcondensed: ["IBM Plex Sans Condensed", "sans-serif"],
-        caveat: ["Caveat", "sans-serif"],
+        caveat: ["caveat", "Shadows Into Light"],
       },
     },
   },
