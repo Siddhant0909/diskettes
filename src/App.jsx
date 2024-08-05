@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "./redux/features/authSlice";
 import Navbar from "./components/Navbar";
@@ -15,6 +15,7 @@ const App = () => {
       <div className="mt-[56px]">
         <Outlet />
       </div>
+      <ScrollRestoration />
     </>
   );
 };
