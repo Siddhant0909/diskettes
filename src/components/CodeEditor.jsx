@@ -35,7 +35,7 @@ const CodeEditor = ({ language, value, setVal, isReadOnly }) => {
       options={{
         minimap: { enabled: false },
         wordWrap: "on",
-        readOnly: !isReadOnly,
+        readOnly: isReadOnly,
       }}
     />
   );

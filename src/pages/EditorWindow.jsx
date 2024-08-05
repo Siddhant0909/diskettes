@@ -65,7 +65,9 @@ const EditorWindow = () => {
       setHtml(res.payload.html);
       setCss(res.payload.css);
       setJavascript(res.payload.javascript);
-      setIsReadOnly(Boolean(userId === res.payload.userId));
+      if (userId === res.payload.userId) {
+        setIsReadOnly(false);
+      }
     });
   }, []);
 
