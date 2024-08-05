@@ -18,7 +18,7 @@ const EditorWindow = () => {
   const [active, setActive] = useState("html");
   const [preview, setPreview] = useState(false);
 
-  const [isReadOnly, setIsReadOnly] = useState(null);
+  const [isReadOnly, setIsReadOnly] = useState(true);
 
   const [code, setCode] = useState(`
       <html>
@@ -74,8 +74,10 @@ const EditorWindow = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch(updateDisk({ documentId, data }));
-    }, 2000);
+      if (!isReadOnly) {
+        dispatch(updateDisk({ documentId, data }));
+      }
+    }, 1000);
     return () => clearTimeout(timer);
   }, [html, css, javascript]);
 
