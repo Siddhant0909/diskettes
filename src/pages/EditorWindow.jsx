@@ -92,34 +92,30 @@ const EditorWindow = () => {
           <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
             <LangSwitch setActive={setActive} active={active} />
           </div>
-          {(
-            active === "html" && (
-              <CodeEditor
-                isReadOnly={isReadOnly}
-                language="html"
-                value={html}
-                setVal={setHtml}
-              />
-            )
-          )(
-            active === "css" && (
+          {(active === "html" && (
+            <CodeEditor
+              isReadOnly={isReadOnly}
+              language="html"
+              value={html}
+              setVal={setHtml}
+            />
+          )) ||
+            (active === "css" && (
               <CodeEditor
                 isReadOnly={isReadOnly}
                 language="css"
                 value={css}
                 setVal={setCss}
               />
-            )
-          )(
-            active === "javascript" && (
+            )) ||
+            (active === "javascript" && (
               <CodeEditor
                 language="javascript"
                 value={javascript}
                 setVal={setJavascript}
                 isReadOnly={isReadOnly}
               />
-            )
-          )}
+            ))}
         </div>
         <div className="flex flex-col overflow-hidden">
           <div className="w-full bg-gradient-to-r from-slate-800 to-slate-700">
@@ -136,34 +132,30 @@ const EditorWindow = () => {
             <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
               <LangSwitch setActive={setActive} active={active} />
             </div>
-            {(
-              active === "html" && (
-                <CodeEditor
-                  isReadOnly={isReadOnly}
-                  language="html"
-                  value={html}
-                  setVal={setHtml}
-                />
-              )
-            )(
-              active === "css" && (
+            {(active === "html" && (
+              <CodeEditor
+                isReadOnly={isReadOnly}
+                language="html"
+                value={html}
+                setVal={setHtml}
+              />
+            )) ||
+              (active === "css" && (
                 <CodeEditor
                   isReadOnly={isReadOnly}
                   language="css"
                   value={css}
                   setVal={setCss}
                 />
-              )
-            )(
-              active === "javascript" && (
+              )) ||
+              (active === "javascript" && (
                 <CodeEditor
                   language="javascript"
                   value={javascript}
                   setVal={setJavascript}
                   isReadOnly={isReadOnly}
                 />
-              )
-            )}
+              ))}
           </div>
         </div>
       ) : (
