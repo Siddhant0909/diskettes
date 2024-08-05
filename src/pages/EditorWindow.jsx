@@ -83,6 +83,25 @@ const EditorWindow = () => {
     return () => clearTimeout(timer);
   }, [html, css, javascript]);
 
+  const getEditorProps = () => {
+    switch (active) {
+      case "html":
+        return { language: "html", value: html, setVal: setHtml };
+      case "css":
+        return { language: "css", value: css, setVal: setCss };
+      case "javascript":
+        return {
+          language: "javascript",
+          value: javascript,
+          setVal: setJavascript,
+        };
+      default:
+        return { language: "html", value: html, setVal: setHtml };
+    }
+  };
+
+  const editorProps = getEditorProps();
+
   return loading ? (
     <Loader />
   ) : (
@@ -92,7 +111,8 @@ const EditorWindow = () => {
           <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
             <LangSwitch setActive={setActive} active={active} />
           </div>
-          {(active === "html" && (
+          <CodeEditor {...editorProps} isReadOnly={isReadOnly} />
+          {/* {(active === "html" && (
             <CodeEditor
               isReadOnly={isReadOnly}
               language="html"
@@ -115,7 +135,7 @@ const EditorWindow = () => {
                 setVal={setJavascript}
                 isReadOnly={isReadOnly}
               />
-            ))}
+            ))} */}
         </div>
         <div className="flex flex-col overflow-hidden">
           <div className="w-full bg-gradient-to-r from-slate-800 to-slate-700">
@@ -132,7 +152,8 @@ const EditorWindow = () => {
             <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
               <LangSwitch setActive={setActive} active={active} />
             </div>
-            {(active === "html" && (
+            <CodeEditor {...editorProps} isReadOnly={isReadOnly} />
+            {/* {(active === "html" && (
               <CodeEditor
                 isReadOnly={isReadOnly}
                 language="html"
@@ -155,7 +176,7 @@ const EditorWindow = () => {
                   setVal={setJavascript}
                   isReadOnly={isReadOnly}
                 />
-              ))}
+              ))} */}
           </div>
         </div>
       ) : (

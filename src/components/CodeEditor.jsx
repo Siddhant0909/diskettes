@@ -23,7 +23,7 @@ const CodeEditor = ({ language, value, setVal, isReadOnly }) => {
         })
         .then(() => monaco.editor.setTheme("night-owl"));
     }
-  });
+  }, [monaco]);
 
   return (
     <Editor
