@@ -60,6 +60,8 @@ const EditorWindow = () => {
 
   useEffect(() => {
     dispatch(getDisk(documentId)).then((res) => {
+      console.log(res);
+
       setHtml(res.payload.html);
       setCss(res.payload.css);
       setJavascript(res.payload.javascript);
