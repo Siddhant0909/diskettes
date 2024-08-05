@@ -8,7 +8,7 @@ const Preview = ({ code }) => {
       height="100%"
       title="preview"
       frameBorder="0"
-      sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-modals"
+      sandbox="allow-scripts"
     ></iframe>
   );
 };
