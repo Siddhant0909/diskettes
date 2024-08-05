@@ -75,7 +75,7 @@ const EditorWindow = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(updateDisk({ documentId, data }));
-    }, 1000);
+    }, 2000);
     return () => clearTimeout(timer);
   }, [html, css, javascript]);
 
