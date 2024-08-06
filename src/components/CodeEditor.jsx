@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Editor, useMonaco } from "@monaco-editor/react";
 import "monaco-themes/themes/Night Owl.json";
 
-const CodeEditor = ({ language, value, setVal, isReadOnly }) => {
+const CodeEditor = ({ language, value, setVal }) => {
   const monaco = useMonaco();
 
   const handleValueChange = (newVal) => {
@@ -35,7 +35,6 @@ const CodeEditor = ({ language, value, setVal, isReadOnly }) => {
       options={{
         minimap: { enabled: false },
         wordWrap: "on",
-        readOnly: isReadOnly,
       }}
     />
   );

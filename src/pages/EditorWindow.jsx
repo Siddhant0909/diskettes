@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CodeEditor from "../components/CodeEditor";
-import { SAMPLE_CODE } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Preview from "../components/Preview";
@@ -111,10 +110,9 @@ const EditorWindow = () => {
           <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
             <LangSwitch setActive={setActive} active={active} />
           </div>
-          <CodeEditor {...editorProps} isReadOnly={isReadOnly} />
+          <CodeEditor {...editorProps} />
           {/* {(active === "html" && (
             <CodeEditor
-              isReadOnly={isReadOnly}
               language="html"
               value={html}
               setVal={setHtml}
@@ -122,7 +120,6 @@ const EditorWindow = () => {
           )) ||
             (active === "css" && (
               <CodeEditor
-                isReadOnly={isReadOnly}
                 language="css"
                 value={css}
                 setVal={setCss}
@@ -133,7 +130,7 @@ const EditorWindow = () => {
                 language="javascript"
                 value={javascript}
                 setVal={setJavascript}
-                isReadOnly={isReadOnly}
+              
               />
             ))} */}
         </div>
@@ -152,10 +149,9 @@ const EditorWindow = () => {
             <div className="w-full bg-gradient-to-r from-slate-900 to-slate-800">
               <LangSwitch setActive={setActive} active={active} />
             </div>
-            <CodeEditor {...editorProps} isReadOnly={isReadOnly} />
+            <CodeEditor {...editorProps} />
             {/* {(active === "html" && (
               <CodeEditor
-                isReadOnly={isReadOnly}
                 language="html"
                 value={html}
                 setVal={setHtml}
@@ -163,7 +159,6 @@ const EditorWindow = () => {
             )) ||
               (active === "css" && (
                 <CodeEditor
-                  isReadOnly={isReadOnly}
                   language="css"
                   value={css}
                   setVal={setCss}
@@ -174,7 +169,7 @@ const EditorWindow = () => {
                   language="javascript"
                   value={javascript}
                   setVal={setJavascript}
-                  isReadOnly={isReadOnly}
+                
                 />
               ))} */}
           </div>
