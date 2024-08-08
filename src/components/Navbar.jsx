@@ -31,7 +31,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-[56px] flex items-center bg-gradient-to-r from-slate-800 to-slate-700  z-20  shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
+    <header className="fixed top-0 left-0 right-0 h-[56px] flex items-center bg-gradient-to-r border-slate-400 border-b-[1px]  from-slate-900 to-slate-700  z-20  shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
       <nav className="flex items-center justify-between w-full px-4 md:px-0 md:w-[90%] md:mx-auto">
         <Link to="/" className="flex items-center cursor-pointer">
           <h1 className="text-2xl font-semibold font-ibmsans">Diskettes</h1>
@@ -40,7 +40,7 @@ const Navbar = () => {
         {user && (
           <form
             onSubmit={handleSubmit}
-            className="flex items-center flex-1 gap-2 px-4 py-2 mx-3 overflow-hidden shadow-[inset_-12px_-8px_40px_#46464620] text-white rounded-full bg-slate-700 max-w-96 sm:mx-10 "
+            className="flex items-center flex-1 gap-2 border-[1px] border-slate-400 px-4 py-2 mx-3 overflow-hidden shadow-[inset_-12px_-8px_40px_#46464620] text-white rounded-full bg-slate-700 max-w-96 sm:mx-10 "
           >
             <FaSearch className="text-slate-300" />
             <input
@@ -58,7 +58,7 @@ const Navbar = () => {
             <div className="items-center hidden gap-4 sm:flex ">
               <NavLink
                 className={({ isActive }) =>
-                  `text-md ${
+                  `text-md hover:brightness-75 active:brightness-105 transition-all ease-in-out ${
                     isActive &&
                     "text-slate-900 bg-white rounded-full px-2 font-semibold py-1"
                   }`
@@ -69,7 +69,7 @@ const Navbar = () => {
               </NavLink>
               <NavLink
                 className={({ isActive }) =>
-                  `text-md ${
+                  `text-md hover:brightness-75 active:brightness-105 transition-all ease-in-out ${
                     isActive &&
                     "text-slate-900 bg-white rounded-full px-2 font-semibold py-1"
                   }`
@@ -80,7 +80,7 @@ const Navbar = () => {
               </NavLink>
               <NavLink
                 className={({ isActive }) =>
-                  `text-md hidden lg:block  ${
+                  `text-md hidden lg:block hover:brightness-75 active:brightness-105 transition-all ease-in-out ${
                     isActive &&
                     "text-slate-900 bg-white rounded-full px-2 font-semibold py-1"
                   }`
@@ -91,7 +91,7 @@ const Navbar = () => {
               </NavLink>
               <NavLink
                 className={({ isActive }) =>
-                  `text-md ${
+                  `text-md hover:brightness-75 active:brightness-105 transition-all ease-in-out ${
                     isActive &&
                     "text-slate-900 bg-white rounded-full px-2 font-semibold py-1"
                   }`
