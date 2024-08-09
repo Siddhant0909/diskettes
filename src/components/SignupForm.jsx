@@ -19,7 +19,7 @@ const SignupForm = () => {
 
   return (
     <div className="flex items-center mt-[-56px] justify-center w-full h-screen">
-      <div className=" w-[350px] bg-slate-900 shadow-sm mt-7 rounded-xl  border-2 border-solid border-slate-900">
+      <div className=" w-[350px] bg-slate-900 shadow-sm mt-7 rounded-xl  border-2 border-solid border-slate-600">
         <div className="p-4 sm:p-7">
           <div className="text-center">
             <h1 className="block text-2xl font-bold text-white">Sign up</h1>
