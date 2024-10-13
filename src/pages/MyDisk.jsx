@@ -18,7 +18,7 @@ const MyDisk = () => {
     <Loader />
   ) : (
     <>
-      <div className="flex flex-wrap justify-center w-full h-full gap-4 p-3 pt-4 pb-[66px] sm:justify-start sm:px-0">
+      <div className="flex flex-wrap justify-center w-full h-full gap-x-12 gap-y-6 p-3 pt-4 pb-[66px] sm:justify-start sm:px-0">
         {disks?.map((disk) => (
           <div key={disk.$id}>
             <Disk disk={disk} userId={userId} />
